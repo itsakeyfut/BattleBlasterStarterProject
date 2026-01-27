@@ -47,7 +47,6 @@ void ABattleBlasterGameMode::BeginPlay()
 void ABattleBlasterGameMode::ActorDied(AActor* DeadActor)
 {
 	bool IsGameOver = false;
-	bool IsVictory = false;
 
 	if (DeadActor == Tank)
 	{
@@ -83,5 +82,14 @@ void ABattleBlasterGameMode::ActorDied(AActor* DeadActor)
 void ABattleBlasterGameMode::OnGameOverTimeout()
 {
 	FString CurrentLevelName = UGameplayStatics::GetCurrentLevelName(GetWorld());
-	UGameplayStatics::OpenLevel(GetWorld(), *CurrentLevelName);
+
+	if (IsVictory)
+	{
+		// Load the next level
+	}
+	else
+	{
+		// Reload the current level
+		UGameplayStatics::OpenLevel(GetWorld(), *CurrentLevelName);
+	}
 }

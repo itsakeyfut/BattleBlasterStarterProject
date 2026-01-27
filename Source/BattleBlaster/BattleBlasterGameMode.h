@@ -24,6 +24,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	float GameOverDelay = 3.0f;
 
+	bool IsVictory = false;
+
 	ATank* Tank;
 
 	int32 TowerCount;
