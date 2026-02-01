@@ -2,6 +2,7 @@
 
 
 #include "Projectile.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -15,6 +16,9 @@ AProjectile::AProjectile()
 	ProjectileMovementComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("UProjectileMovementComp"));
 	ProjectileMovementComp->InitialSpeed = 1000.0f;
 	ProjectileMovementComp->MaxSpeed = 1000.0f;
+
+	TrailParticles = CreateDefaultSubobject<UNiagaraComponent>(TEXT("TrailParticles"));
+	TrailParticles->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -39,6 +43,8 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 		if (OtherActor && (OtherActor != MyOwner) && (OtherActor != this))
 		{
 			UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwner->GetInstigatorController(), this, UDamageType::StaticClass());
+
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), HitParticles, GetActorLocation(), GetActorRotation());
 		}
 	}
 
