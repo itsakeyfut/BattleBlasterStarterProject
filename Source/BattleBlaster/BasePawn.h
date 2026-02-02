@@ -23,7 +23,7 @@ public:
 	ABasePawn();
 
 	UPROPERTY(VisibleAnywhere)
-	UCapsuleComponent* CapsuleComp;
+	UCapsuleComponent* CapsuleComponent;
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* BaseMesh;

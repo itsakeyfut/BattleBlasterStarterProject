@@ -13,9 +13,9 @@ AProjectile::AProjectile()
 	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMesh"));
 	SetRootComponent(ProjectileMesh);
 
-	ProjectileMovementComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("UProjectileMovementComp"));
-	ProjectileMovementComp->InitialSpeed = 1000.0f;
-	ProjectileMovementComp->MaxSpeed = 1000.0f;
+	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
+	ProjectileMovementComponent->InitialSpeed = 1000.0f;
+	ProjectileMovementComponent->MaxSpeed = 1000.0f;
 
 	TrailParticles = CreateDefaultSubobject<UNiagaraComponent>(TEXT("TrailParticles"));
 	TrailParticles->SetupAttachment(RootComponent);

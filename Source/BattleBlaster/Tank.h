@@ -48,9 +48,9 @@ public:
 	UInputAction* FireAction;
 
 	UPROPERTY(VisibleAnywhere)
-	USpringArmComponent* SpringArmComp;
+	USpringArmComponent* SpringArmComponent;
 	UPROPERTY(VisibleAnywhere)
-	class UCameraComponent* CameraComp;
+	class UCameraComponent* CameraComponent;
 
 	UPROPERTY(EditAnywhere)
 	float Speed = 300.0f;
