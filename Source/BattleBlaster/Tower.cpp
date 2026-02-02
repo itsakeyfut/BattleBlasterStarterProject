@@ -30,13 +30,13 @@ void ATower::CheckFireCondition()
 
 bool ATower::IsInFireRange()
 {
-	bool Result = false;
+	bool bResult = false;
 	if (Tank)
 	{
 		float DistanceToTank = FVector::Dist(GetActorLocation(), Tank->GetActorLocation());
-		Result = (DistanceToTank <= FireRange);
+		bResult = (DistanceToTank <= FireRange);
 	}
-	return Result;
+	return bResult;
 }
 
 void ATower::HandleDestruction()

@@ -48,9 +48,9 @@ public:
 	UInputAction* FireAction;
 
 	void HandleDestruction();
-	void SetPlayerEnabled(bool Enabled);
+	void SetPlayerEnabled(bool bEnabled);
 
-	bool IsPlayerAlive() const { return IsAlive; }
+	bool IsPlayerAlive() const { return bIsAlive; }
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
@@ -66,7 +66,7 @@ protected:
 	float TurnRate = 50.0f;
 
 private:
-	bool IsAlive = true;
+	bool bIsAlive = true;
 
 	APlayerController* PlayerController;
 

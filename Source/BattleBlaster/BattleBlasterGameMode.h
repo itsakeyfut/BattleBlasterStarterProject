@@ -41,7 +41,7 @@ private:
 
 	FTimerHandle CountdownTimerHandle;
 
-	bool IsVictory = false;
+	bool bIsVictory = false;
 
 	ATank* Tank;
 

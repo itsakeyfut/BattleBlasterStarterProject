@@ -89,12 +89,12 @@ void ABattleBlasterGameMode::OnCountdownTimerTimeout()
 
 void ABattleBlasterGameMode::ActorDied(AActor* DeadActor)
 {
-	bool IsGameOver = false;
+	bool bIsGameOver = false;
 
 	if (DeadActor == Tank)
 	{
 		Tank->HandleDestruction();
-		IsGameOver = true;
+		bIsGameOver = true;
 	}
 	else
 	{
@@ -106,17 +106,17 @@ void ABattleBlasterGameMode::ActorDied(AActor* DeadActor)
 			TowerCount--;
 			if (TowerCount == 0)
 			{
-				IsGameOver = true;
-				IsVictory = true;
+				bIsGameOver = true;
+				bIsVictory = true;
 			}
 		}
 	}
 
-	if (IsGameOver)
+	if (bIsGameOver)
 	{
 		if (ScreenMessageWidget)
 		{
-			FString GameOverString = IsVictory ? "Victory!" : "Defeat!";
+			FString GameOverString = bIsVictory ? "Victory!" : "Defeat!";
 			ScreenMessageWidget->SetMessageText(GameOverString);
 			ScreenMessageWidget->SetVisibility(ESlateVisibility::Visible);
 		}
@@ -134,7 +134,7 @@ void ABattleBlasterGameMode::OnGameOverTimeout()
 		UBattleBlasterGameInstance* BattleBlasterGameInstance = Cast<UBattleBlasterGameInstance>(GameInstance);
 		if (BattleBlasterGameInstance)
 		{
-			if (IsVictory)
+			if (bIsVictory)
 			{
 				// Load the next level
 				BattleBlasterGameInstance->LoadNextLevel();

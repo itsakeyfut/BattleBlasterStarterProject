@@ -97,14 +97,14 @@ void ATank::HandleDestruction()
 	SetActorTickEnabled(false);
 	SetPlayerEnabled(false);
 
-	IsAlive = false;
+	bIsAlive = false;
 }
 
-void ATank::SetPlayerEnabled(bool Enabled)
+void ATank::SetPlayerEnabled(bool bEnabled)
 {
 	if (PlayerController)
 	{
-		if (Enabled)
+		if (bEnabled)
 		{
 			EnableInput(PlayerController);
 		}
@@ -113,6 +113,6 @@ void ATank::SetPlayerEnabled(bool Enabled)
 			DisableInput(PlayerController);
 		}
 
-		PlayerController->bShowMouseCursor = Enabled;
+		PlayerController->bShowMouseCursor = bEnabled;
 	}
 }
