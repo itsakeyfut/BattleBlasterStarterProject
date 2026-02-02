@@ -1,0 +1,70 @@
+root = true
+
+# Unreal Engine C++ Files
+[*.{h,cpp}]
+indent_style = tab
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+# C++ specific rules
+[*.h]
+# Header guards and documentation
+insert_final_newline = true
+
+[*.cpp]
+# Implementation files
+insert_final_newline = true
+
+# Naming conventions
+[*.{h,cpp}]
+# Class names: Pascal case
+dotnet_naming_style.class_style.capitalization = pascal_case
+dotnet_naming_symbols.class_symbols.applicable_kinds = class
+dotnet_naming_symbols.class_symbols.applicable_accessibilities = *
+dotnet_naming_rule.class_naming.severity = suggestion
+dotnet_naming_rule.class_naming.symbols = class_symbols
+dotnet_naming_rule.class_naming.style = class_style
+
+# Method names: Pascal case
+dotnet_naming_style.method_style.capitalization = pascal_case
+dotnet_naming_symbols.method_symbols.applicable_kinds = method, function
+dotnet_naming_symbols.method_symbols.applicable_accessibilities = *
+dotnet_naming_rule.method_naming.severity = suggestion
+dotnet_naming_rule.method_naming.symbols = method_symbols
+dotnet_naming_rule.method_naming.style = method_style
+
+# Bool variable names: camelCase with 'b' prefix (Unreal Engine convention)
+# e.g., bIsAlive, bIsEnabled, bHasSpawned
+dotnet_naming_style.bool_style.required_prefix = b
+dotnet_naming_style.bool_style.capitalization = camel_case
+dotnet_naming_symbols.bool_symbols.applicable_kinds = variable, local, parameter
+dotnet_naming_symbols.bool_symbols.applicable_accessibilities = *
+dotnet_naming_rule.bool_naming.severity = suggestion
+dotnet_naming_rule.bool_naming.symbols = bool_symbols
+dotnet_naming_rule.bool_naming.style = bool_style
+
+# Local variable names: camelCase
+dotnet_naming_style.local_var_style.capitalization = camel_case
+dotnet_naming_symbols.local_var_symbols.applicable_kinds = local
+dotnet_naming_symbols.local_var_symbols.applicable_accessibilities = *
+dotnet_naming_rule.local_var_naming.severity = suggestion
+dotnet_naming_rule.local_var_naming.symbols = local_var_symbols
+dotnet_naming_rule.local_var_naming.style = local_var_style
+
+# Member variable names: camelCase (private/protected members)
+dotnet_naming_style.member_var_style.capitalization = camel_case
+dotnet_naming_symbols.member_var_symbols.applicable_kinds = field
+dotnet_naming_symbols.member_var_symbols.applicable_accessibilities = private, protected
+dotnet_naming_rule.member_var_naming.severity = suggestion
+dotnet_naming_rule.member_var_naming.symbols = member_var_symbols
+dotnet_naming_rule.member_var_naming.style = member_var_style
+
+# Property names: Pascal case (public members)
+dotnet_naming_style.property_style.capitalization = pascal_case
+dotnet_naming_symbols.property_symbols.applicable_kinds = field
+dotnet_naming_symbols.property_symbols.applicable_accessibilities = public
+dotnet_naming_rule.property_naming.severity = suggestion
+dotnet_naming_rule.property_naming.symbols = property_symbols
+dotnet_naming_rule.property_naming.style = property_style
