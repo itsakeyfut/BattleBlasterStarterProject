@@ -27,10 +27,8 @@ void ABattleBlasterGameMode::BeginPlay()
 		}
 	}
 
-	int32 i = 0;
-	while (i < TowerCount)
+	for (AActor* TowerActor : Towers)
 	{
-		AActor* TowerActor = Towers[i];
 		if (TowerActor)
 		{
 			ATower* Tower = Cast<ATower>(TowerActor);
@@ -40,8 +38,6 @@ void ABattleBlasterGameMode::BeginPlay()
 				UE_LOG(LogTemp, Display, TEXT("%s setting the tank variables!"), *Tower->GetActorNameOrLabel());
 			}
 		}
-
-		i++;
 	}
 
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
