@@ -31,14 +31,14 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 	UWorld* World = GetWorld();
 	if (World)
 	{
-		FRotator InterpolaatedRotation = FMath::RInterpTo(
+		FRotator InterpolatedRotation = FMath::RInterpTo(
 			TurretMesh->GetComponentRotation(),
 			LookAtRotation,
 			World->GetDeltaSeconds(),
 			10.0f
 		);
 
-		TurretMesh->SetWorldRotation(InterpolaatedRotation);
+		TurretMesh->SetWorldRotation(InterpolatedRotation);
 	}
 }
 
