@@ -33,6 +33,8 @@ public:
 
 	ATank* Tank;
 
+	FTimerHandle FireTimerHandle;
+
 	void CheckFireCondition();
 	bool IsInFireRange();
 

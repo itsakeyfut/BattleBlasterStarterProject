@@ -25,12 +25,16 @@ AProjectile::AProjectile()
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	ProjectileMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 
 	if (LaunchSound)
 	{
-		UGameplayStatics::PlaySoundAtLocation(GetWorld(), LaunchSound, GetActorLocation());
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			UGameplayStatics::PlaySoundAtLocation(World, LaunchSound, GetActorLocation());
+		}
 	}
 }
 
@@ -49,20 +53,24 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 		{
 			UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwner->GetInstigatorController(), this, UDamageType::StaticClass());
 
-			if (HitParticles)
+			UWorld* World = GetWorld();
+			if (World)
 			{
-				UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), HitParticles, GetActorLocation(), GetActorRotation());
-			}
-			if (HitSound)
-			{
-				UGameplayStatics::PlaySoundAtLocation(GetWorld(), HitSound, GetActorLocation());
-			}
-			if (HitCameraShakeClass)
-			{
-				APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-				if (PlayerController)
+				if (HitParticles)
 				{
-					PlayerController->ClientStartCameraShake(HitCameraShakeClass);
+					UNiagaraFunctionLibrary::SpawnSystemAtLocation(World, HitParticles, GetActorLocation(), GetActorRotation());
+				}
+				if (HitSound)
+				{
+					UGameplayStatics::PlaySoundAtLocation(World, HitSound, GetActorLocation());
+				}
+				if (HitCameraShakeClass)
+				{
+					APlayerController* PlayerController = UGameplayStatics::GetPlayerController(World, 0);
+					if (PlayerController)
+					{
+						PlayerController->ClientStartCameraShake(HitCameraShakeClass);
+					}
 				}
 			}
 		}

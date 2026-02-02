@@ -7,7 +7,6 @@ void ATower::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FTimerHandle FireTimerHandle;
 	GetWorldTimerManager().SetTimer(FireTimerHandle, this, &ATower::CheckFireCondition, FireRate, true);
 }
 
@@ -15,7 +14,7 @@ void ATower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (IsInFireRange())
+	if (Tank && IsInFireRange())
 	{
 		RotateTurret(Tank->GetActorLocation());
 	}

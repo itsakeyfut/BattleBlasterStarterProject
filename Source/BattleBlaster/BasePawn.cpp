@@ -28,14 +28,18 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 	FVector VectorToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
 	FRotator LookAtRotation = FRotator(0.0f, VectorToTarget.Rotation().Yaw, 0.0f);
 
-	FRotator InterpolaatedRotation = FMath::RInterpTo(
-		TurretMesh->GetComponentRotation(),
-		LookAtRotation,
-		GetWorld()->GetDeltaSeconds(),
-		10.0f
-	);
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		FRotator InterpolaatedRotation = FMath::RInterpTo(
+			TurretMesh->GetComponentRotation(),
+			LookAtRotation,
+			World->GetDeltaSeconds(),
+			10.0f
+		);
 
-	TurretMesh->SetWorldRotation(InterpolaatedRotation);
+		TurretMesh->SetWorldRotation(InterpolaatedRotation);
+	}
 }
 
 void ABasePawn::Fire()
@@ -43,27 +47,38 @@ void ABasePawn::Fire()
 	FVector SpawnLocation = ProjectileSpawnPoint->GetComponentLocation();
 	FRotator SpawnRotation = ProjectileSpawnPoint->GetComponentRotation();
 
-	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
-	if (Projectile)
+	UWorld* World = GetWorld();
+	if (World)
 	{
-		Projectile->SetOwner(this);
+		AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
+		if (Projectile)
+		{
+			Projectile->SetOwner(this);
+		}
 	}
 }
 
 void ABasePawn::HandleDestruction()
 {
 	UE_LOG(LogTemp, Display, TEXT("BasePawn HandleDestruction"));
+
+	UWorld* World = GetWorld();
+	if (!World)
+	{
+		return;
+	}
+
 	if (DeathParticles)
 	{
-		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), DeathParticles, GetActorLocation(), GetActorRotation());
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(World, DeathParticles, GetActorLocation(), GetActorRotation());
 	}
 	if (ExplosionSound)
 	{
-		UGameplayStatics::PlaySoundAtLocation(GetWorld(), ExplosionSound, GetActorLocation());
+		UGameplayStatics::PlaySoundAtLocation(World, ExplosionSound, GetActorLocation());
 	}
 	if (DeathCameraShakeClass)
 	{
-		APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+		APlayerController* PlayerController = UGameplayStatics::GetPlayerController(World, 0);
 		if (PlayerController)
 		{
 			PlayerController->ClientStartCameraShake(DeathCameraShakeClass);

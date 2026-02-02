@@ -5,6 +5,9 @@
 
 void UScreenMessage::SetMessageText(FString Message)
 {
-	FText MessageText = FText::FromString(Message);
-	MessageTextBlock->SetText(MessageText);
+	if (MessageTextBlock)
+	{
+		FText MessageText = FText::FromString(Message);
+		MessageTextBlock->SetText(MessageText);
+	}
 }

@@ -23,12 +23,20 @@ void UHealthComponent::BeginPlay()
 
 	Health = MaxHealth;
 
-	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::OnDamageTaken);
-
-	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(GetWorld());
-	if (GameMode)
+	AActor* Owner = GetOwner();
+	if (Owner)
 	{
-		BattleBlasterGameMode = Cast<ABattleBlasterGameMode>(GameMode);
+		Owner->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::OnDamageTaken);
+	}
+
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		AGameModeBase* GameMode = UGameplayStatics::GetGameMode(World);
+		if (GameMode)
+		{
+			BattleBlasterGameMode = Cast<ABattleBlasterGameMode>(GameMode);
+		}
 	}
 }
 
