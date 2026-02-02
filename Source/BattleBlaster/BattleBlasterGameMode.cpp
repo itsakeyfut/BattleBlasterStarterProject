@@ -34,7 +34,7 @@ void ABattleBlasterGameMode::BeginPlay()
 			ATower* Tower = Cast<ATower>(TowerActor);
 			if (Tower && Tank)
 			{
-				Tower->Tank = Tank;
+				Tower->SetTank(Tank);
 				UE_LOG(LogTemp, Display, TEXT("%s setting the tank variables!"), *Tower->GetActorNameOrLabel());
 			}
 		}

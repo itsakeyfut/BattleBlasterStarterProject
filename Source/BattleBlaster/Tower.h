@@ -16,7 +16,7 @@ UCLASS()
 class BATTLEBLASTER_API ATower : public ABasePawn
 {
 	GENERATED_BODY()
-	
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -25,18 +25,22 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere)
+	void HandleDestruction();
+
+	void SetTank(ATank* InTank) { Tank = InTank; }
+
+protected:
+	UPROPERTY(EditAnywhere, Category = "Combat")
 	float FireRange = 300.0f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Combat")
 	float FireRate = 2.0f;
 
+private:
 	ATank* Tank;
 
 	FTimerHandle FireTimerHandle;
 
 	void CheckFireCondition();
 	bool IsInFireRange();
-
-	void HandleDestruction();
 };

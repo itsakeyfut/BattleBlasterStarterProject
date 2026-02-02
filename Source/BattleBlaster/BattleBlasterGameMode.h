@@ -17,21 +17,25 @@ UCLASS()
 class BATTLEBLASTER_API ABattleBlasterGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
 protected:
 	virtual void BeginPlay() override;
 
 public:
-	UPROPERTY(EditAnywhere)
+	void ActorDied(AActor* DeadActor);
+
+protected:
+	UPROPERTY(EditAnywhere, Category = "UI")
 	TSubclassOf<UScreenMessage> ScreenMessageClass;
 
-	UScreenMessage* ScreenMessageWidget;
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
 	float GameOverDelay = 3.0f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Game Rules")
 	int32 CountdownDelay = 3;
+
+private:
+	UScreenMessage* ScreenMessageWidget;
 
 	int32 CountdownSeconds;
 
@@ -42,8 +46,6 @@ public:
 	ATank* Tank;
 
 	int32 TowerCount;
-
-	void ActorDied(AActor* DeadActor);
 
 	void OnGameOverTimeout();
 	void OnCountdownTimerTimeout();

@@ -16,10 +16,11 @@ UCLASS()
 class BATTLEBLASTER_API UScreenMessage : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
 public:
+	void SetMessageText(FString Message);
+
+protected:
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	UTextBlock* MessageTextBlock;
-
-	void SetMessageText(FString Message);
 };

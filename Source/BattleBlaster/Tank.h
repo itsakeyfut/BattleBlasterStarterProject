@@ -47,24 +47,29 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	UInputAction* FireAction;
 
-	UPROPERTY(VisibleAnywhere)
+	void HandleDestruction();
+	void SetPlayerEnabled(bool Enabled);
+
+	bool IsPlayerAlive() const { return IsAlive; }
+
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	USpringArmComponent* SpringArmComponent;
-	UPROPERTY(VisibleAnywhere)
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UCameraComponent* CameraComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	float Speed = 300.0f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Movement")
 	float TurnRate = 50.0f;
 
+private:
 	bool IsAlive = true;
 
 	APlayerController* PlayerController;
 
 	void MoveInput(const FInputActionValue& Value);
 	void TurnInput(const FInputActionValue& Value);
-
-	void HandleDestruction();
-	void SetPlayerEnabled(bool Enabled);
 };
